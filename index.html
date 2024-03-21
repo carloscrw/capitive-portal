@@ -10,6 +10,59 @@
     <div class="container">
       <button id="wifiButton">Conectar ao Wi-Fi</button>
     </div>
-    <script src="./js/script.js"></script>
+    <script>
+      // Função para extrair parâmetros da URL
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+
+      // Obtém a URL de autenticação e a senha do usuário
+      var authenticationURL = "https://meucaptive.intelbras.com.br:2061/cp/itbcaptive.cgi";
+      var senha = "sua_senha_aqui"; // Substitua pela senha real do usuário
+
+      // Adiciona um evento de clique ao botão "Conectar ao Wi-Fi"
+      document.getElementById("wifiButton").addEventListener("click", function() {
+        // Obtém os parâmetros da URL
+        var continueURL = getParameterByName("continue");
+        var userHash = getParameterByName("user_hash");
+
+        // Se houver continueURL e userHash, submete a URL de autenticação
+        if (continueURL && userHash) {
+          // Cria um formulário para submeter a URL de autenticação
+          var form = document.createElement("form");
+          form.method = "POST";
+          form.action = authenticationURL;
+
+          // Adiciona os parâmetros necessários ao formulário
+          var continueInput = document.createElement("input");
+          continueInput.type = "hidden";
+          continueInput.name = "continue";
+          continueInput.value = continueURL;
+          form.appendChild(continueInput);
+
+          var userHashInput = document.createElement("input");
+          userHashInput.type = "hidden";
+          userHashInput.name = "user_hash";
+          userHashInput.value = userHash;
+          form.appendChild(userHashInput);
+
+          var senhaInput = document.createElement("input");
+          senhaInput.type = "hidden";
+          senhaInput.name = "password";
+          senhaInput.value = senha;
+          form.appendChild(senhaInput);
+
+          // Adiciona o formulário à página e o submete
+          document.body.appendChild(form);
+          form.submit();
+        }
+      });
+    </script>
   </body>
 </html>
