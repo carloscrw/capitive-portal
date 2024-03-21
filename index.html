@@ -23,46 +23,49 @@
       }
 
       // Obtém a URL de autenticação e a senha do usuário
-      var authenticationURL = "https://meucaptive.intelbras.com.br:2061/cp/itbcaptive.cgi";
-      var senha = "sua_senha_aqui"; // Substitua pela senha real do usuário
+      var authenticationURL =
+        "https://meucaptive.intelbras.com.br:2061/cp/itbcaptive.cgi";
+      var senha = "The000vd@"; // Substitua pela senha real do usuário
 
       // Adiciona um evento de clique ao botão "Conectar ao Wi-Fi"
-      document.getElementById("wifiButton").addEventListener("click", function() {
-        // Obtém os parâmetros da URL
-        var continueURL = getParameterByName("continue");
-        var userHash = getParameterByName("user_hash");
+      document
+        .getElementById("wifiButton")
+        .addEventListener("click", function () {
+          // Obtém os parâmetros da URL
+          var continueURL = getParameterByName("continue");
+          var userHash = getParameterByName("user_hash");
 
-        // Se houver continueURL e userHash, submete a URL de autenticação
-        if (continueURL && userHash) {
-          // Cria um formulário para submeter a URL de autenticação
-          var form = document.createElement("form");
-          form.method = "POST";
-          form.action = authenticationURL;
+          // Se houver continueURL e userHash, submete a URL de autenticação
+          if (continueURL && userHash) {
+            // Cria um formulário para submeter a URL de autenticação
+            var form = document.createElement("form");
+            form.method = "POST";
+            form.action = authenticationURL;
 
-          // Adiciona os parâmetros necessários ao formulário
-          var continueInput = document.createElement("input");
-          continueInput.type = "hidden";
-          continueInput.name = "continue";
-          continueInput.value = continueURL;
-          form.appendChild(continueInput);
+            // Adiciona os parâmetros necessários ao formulário
+            var continueInput = document.createElement("input");
+            continueInput.type = "hidden";
+            continueInput.name = "continue";
+            continueInput.value = continueURL;
+            form.appendChild(continueInput);
 
-          var userHashInput = document.createElement("input");
-          userHashInput.type = "hidden";
-          userHashInput.name = "user_hash";
-          userHashInput.value = userHash;
-          form.appendChild(userHashInput);
+            var userHashInput = document.createElement("input");
+            userHashInput.type = "hidden";
+            userHashInput.name = "user_hash";
+            userHashInput.value = userHash;
+            form.appendChild(userHashInput);
 
-          var senhaInput = document.createElement("input");
-          senhaInput.type = "hidden";
-          senhaInput.name = "password";
-          senhaInput.value = senha;
-          form.appendChild(senhaInput);
+            var senhaInput = document.createElement("input");
+            senhaInput.type = "hidden";
+            senhaInput.name = "password";
+            senhaInput.value = senha;
+            form.appendChild(senhaInput);
 
-          // Adiciona o formulário à página e o submete
-          document.body.appendChild(form);
-          form.submit();
-        }
-      });
+            // Adiciona o formulário à página e o submete
+            document.body.appendChild(form);
+            form.submit();
+          }
+        });
     </script>
   </body>
 </html>
