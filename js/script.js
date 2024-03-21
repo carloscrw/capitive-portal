@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
       "&user_hash=" +
       userHash;
 
+    // Realiza o redirecionamento para a página de autenticação
     window.location.href = finalUrl;
   }
 
