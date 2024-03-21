@@ -34,9 +34,14 @@
           // Obtém os parâmetros da URL
           var continueURL = getParameterByName("continue");
           var userHash = getParameterByName("user_hash");
+          var redirectURI = getParameterByName("redirect_uri");
+
+          console.log("continueURL:", continueURL);
+          console.log("userHash:", userHash);
+          console.log("redirectURI:", redirectURI);
 
           // Se houver continueURL e userHash, submete a URL de autenticação
-          if (continueURL && userHash) {
+          if (continueURL && userHash && redirectURI) {
             // Cria um formulário para submeter a URL de autenticação
             var form = document.createElement("form");
             form.method = "POST";
