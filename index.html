@@ -1,68 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CAPTIVE PORTAL</title>
-  </head>
-  <body>
+</head>
+<body>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-      input[type="submit"] {
-        margin-top: 10px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: none;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-      }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
     <h2>Bem-vindo à nossa rede Wi-Fi!</h2>
     <img src="./img/logo.jpeg" alt="Your Logo" width="200" /><br />
     <form id="loginForm">
-      <input type="submit" value="Entre no nosso Grupo para liberar internet" />
+        <input type="submit" value="Entre no nosso Grupo para liberar internet" />
     </form>
 
     <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Evita o envio do formulário
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita o envio do formulário
 
-          // Aqui você verificaria se o usuário já está no grupo do WhatsApp
-          // Para fins de demonstração, vamos assumir que ele não está no grupo
-          var isInWhatsAppGroup = false;
+            // Aqui você verificaria se o usuário já está no grupo do WhatsApp
+            // Para fins de demonstração, vamos assumir que ele não está no grupo
+            var isInWhatsAppGroup = false;
 
-          if (isInWhatsAppGroup) {
-            // Se o usuário já estiver no grupo do WhatsApp, conceda acesso à internet
-            alert(
-              "Você já está no grupo do WhatsApp. Acesso à internet concedido!"
-            );
-            // Você pode redirecionar o usuário para uma página específica ou simplesmente fechar o portal cativo aqui
-            // Para fins de demonstração, vamos recarregar a página
-            location.reload();
-          } else {
-            // Se o usuário não estiver no grupo do WhatsApp, solicite que ele participe
-            if (
-              confirm(
-                "Para acessar a internet, entre em nosso grupo de WhatsApp."
-              )
-            ) {
-              // Aqui você pode redirecionar o usuário para o link do grupo do WhatsApp
-              // Por exemplo:
-              window.location.href =
-                "https://chat.whatsapp.com/GnHBcrdzoIpH4EAOME62dn";
+            if (isInWhatsAppGroup) {
+                // Se o usuário já estiver no grupo do WhatsApp, conceda acesso à internet
+                alert("Você já está no grupo do WhatsApp. Acesso à internet concedido!");
+                // Você pode redirecionar o usuário para uma página específica ou simplesmente fechar o portal cativo aqui
+                // Para fins de demonstração, vamos recarregar a página
+                location.reload();
             } else {
-              // Caso o usuário opte por não entrar, você pode exibir uma mensagem ou tomar outra ação
-              alert("Sem acesso à internet. Obrigado por visitar!");
+                // Se o usuário não estiver no grupo do WhatsApp, solicite que ele participe
+                if (confirm("Para acessar a internet, entre em nosso grupo de WhatsApp.")) {
+                    // Aqui você pode redirecionar o usuário para o link do grupo do WhatsApp
+                    // Usando o protocolo whatsapp://
+                    window.location.href = "whatsapp://chat?code=GnHBcrdzoIpH4EAOME62dn";
+                } else {
+                    // Caso o usuário opte por não entrar, você pode exibir uma mensagem ou tomar outra ação
+                    alert("Sem acesso à internet. Obrigado por visitar!");
+                }
             }
-          }
         });
     </script>
-  </body>
+</body>
 </html>
