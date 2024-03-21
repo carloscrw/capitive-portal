@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAPITIVE-PORTAL</title>
+</head>
+<body>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome to Our Wi-Fi Network!</h2>
+    <img src="your_logo.png" alt="Your Logo" width="200"><br>
+    <form id="loginForm">
+        <input type="submit" value="Join WhatsApp Group">
+    </form>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Here you would check if the user is already in the WhatsApp group
+            // For demonstration purposes, let's assume they are not in the group
+            var isInWhatsAppGroup = false;
+
+            if (isInWhatsAppGroup) {
+                // If the user is already in the WhatsApp group, grant internet access
+                alert("You are already in the WhatsApp group. Internet access granted!");
+                // You can redirect the user to a specific page or simply close the captive portal here
+                // For demonstration, let's reload the page
+                location.reload();
+            } else {
+                // If the user is not in the WhatsApp group, prompt them to join
+                if (confirm("To access the internet, please join our WhatsApp group.")) {
+                    // If the user chooses to join, redirect them to the WhatsApp group link
+                    window.open("https://chat.whatsapp.com/GnHBcrdzoIpH4EAOME62dn");
+                    // Here you might want to listen for changes in the user's WhatsApp group membership
+                    // Once they join, you can grant internet access
+                } else {
+                    // If the user chooses not to join, inform them that internet access is denied
+                    alert("You must join our WhatsApp group to access the internet.");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
