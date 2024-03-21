@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   var whatsappLink = document.querySelector(".whatsapp");
 
   // Monitorando cliques nos links do Instagram e WhatsApp
-  instagramLink.addEventListener("click", function () {
+  instagramLink.addEventListener("click", function (event) {
+    event.preventDefault(); // Evitar o comportamento padrão do link
     liberarAcessoInternet();
   });
 
-  whatsappLink.addEventListener("click", function () {
+  whatsappLink.addEventListener("click", function (event) {
+    event.preventDefault(); // Evitar o comportamento padrão do link
     liberarAcessoInternet();
   });
 
