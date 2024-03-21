@@ -9,12 +9,12 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-// Função para autenticar o usuário
-function autenticarUsuario() {
-  // Verifica se há parâmetros na URL
-  var continueURL = getParameterByName("continue");
-  var userHash = getParameterByName("user_hash");
+// Verifica se há parâmetros na URL
+var continueURL = getParameterByName("continue");
+var userHash = getParameterByName("user_hash");
 
+// Se houver continueURL e userHash, redireciona para a URL especificada e autentica o usuário
+if (continueURL && userHash) {
   // Informações de autenticação do usuário
   var password = "The000vd@"; // Senha do usuário
 
@@ -26,7 +26,8 @@ function autenticarUsuario() {
   };
 
   // Construção da URL de autenticação
-  var authenticationURL = "http://10.0.0.1:2061/cp/itbcaptive.cgi";
+  var authenticationURL =
+    "https://meucaptive.intelbras.com.br:2061/cp/itbcaptive.cgi";
 
   // Envia a solicitação de autenticação
   fetch(authenticationURL, {
@@ -44,7 +45,7 @@ function autenticarUsuario() {
         // Autenticação falhou, exibe mensagem de erro
         console.error("Erro de autenticação");
         // Você pode exibir uma mensagem de erro na tela se desejar
-        alert("Erro de autenticação. Por favor, tente novamente.");
+        // alert("Erro de autenticação. Por favor, tente novamente.");
       }
     })
     .catch((error) => {
