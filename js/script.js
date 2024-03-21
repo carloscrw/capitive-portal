@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function liberarAcessoInternet() {
     var continueUrl = "http://www.intelbras.com.br"; // URL que o usuário tentou acessar
     var apIp = "10.0.0.1"; // Endereço IP do Access Point
-    var apMac = "00:11:22:33:44:66"; // Endereço MAC do Access Point
+    var apMac = "80:85:44:1C:F3:09"; // Endereço MAC do Access Point
     var clientMac = "00:11:22:33:44:55"; // Endereço MAC do cliente Wireless
     var radio = "radio0"; // Nome do rádio Wireless
     var ssid = "TESTE WIFI"; // Nome do SSID Wireless
