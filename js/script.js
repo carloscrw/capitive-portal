@@ -9,11 +9,46 @@ function getParameterByName(name, url) {
   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-// Verifica se há parâmetros na URL
-var continueURL = getParameterByName("continue");
-var userHash = getParameterByName("user_hash");
+// Função para autenticar o usuário
+function autenticarUsuario() {
+  // Verifica se há parâmetros na URL
+  var continueURL = getParameterByName("continue");
+  var userHash = getParameterByName("user_hash");
 
-// Se houver continueURL, redireciona para a URL especificada
-if (continueURL) {
-  window.location.href = continueURL;
+  // Informações de autenticação do usuário
+  var password = "The000vd@"; // Senha do usuário
+
+  // Construção dos parâmetros da solicitação de autenticação
+  var authenticationParams = {
+    username: "", // Não temos o nome de usuário, apenas a senha
+    password: password,
+    user_hash: userHash,
+  };
+
+  // Construção da URL de autenticação
+  var authenticationURL = "http://10.0.0.1:2061/cp/itbcaptive.cgi";
+
+  // Envia a solicitação de autenticação
+  fetch(authenticationURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(authenticationParams),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Autenticação bem-sucedida, redireciona o usuário para a URL especificada
+        window.location.href = continueURL;
+      } else {
+        // Autenticação falhou, exibe mensagem de erro
+        console.error("Erro de autenticação");
+        // Você pode exibir uma mensagem de erro na tela se desejar
+        alert("Erro de autenticação. Por favor, tente novamente.");
+      }
+    })
+    .catch((error) => {
+      console.error("Erro:", error);
+      // Trate o erro conforme necessário
+    });
 }
