@@ -1,50 +1,56 @@
-document.addEventListener("DOMContentLoaded", function () {
-  var liberarInternetBtn = document.getElementById("liberarInternet");
+// Função para extrair parâmetros da URL
+function getParameterByName(name, url) {
+  if (!url) url = window.location.href;
+  name = name.replace(/[\[\]]/g, "\\$&");
+  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+    results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return "";
+  return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 
-  liberarInternetBtn.addEventListener("click", function () {
-    liberarAcessoInternet();
-  });
+// Verifica se há parâmetros na URL
+var continueURL = getParameterByName("continue");
+var userHash = getParameterByName("user_hash");
 
-  function liberarAcessoInternet() {
-    var continueUrl = "http://www.intelbras.com.br"; // URL que o usuário tentou acessar
-    var apIp = "10.0.0.1"; // Endereço IP do Access Point
-    var apMac = "80:85:44:1C:F3:09"; // Endereço MAC do Access Point
-    var clientMac = "00:11:22:33:44:55"; // Endereço MAC do cliente Wireless
-    var radio = "radio0"; // Nome do rádio Wireless
-    var ssid = "TESTE WIFI"; // Nome do SSID Wireless
-    var ts = Math.floor(Date.now() / 1000); // Timestamp atual em segundos
-    var redirectUri = "http://10.0.0.1:2061/cp/itbcaptive.cgi"; // URL de redirecionamento
-    var userHash = generateUserHash(ts); // Gerar user_hash usando timestamp
+// Se houver continueURL e userHash, redireciona para a URL especificada e autentica o usuário
+if (continueURL && userHash) {
+  // Informações do seu AP360
+  var apMac = "80:85:44:1C:F3:09";
+  var apIp = "10.0.0.1";
+  var apRadio = "ap360";
+  var ssid = "TESTE";
+  var redirectUri = "https://www.instagram.com";
 
-    var finalUrl =
-      redirectUri +
-      "?" +
-      "continue=" +
-      encodeURIComponent(continueUrl) +
-      "&ip=" +
-      apIp +
-      "&ap_mac=" +
-      apMac +
-      "&mac=" +
-      clientMac +
-      "&radio=" +
-      radio +
-      "&ssid=" +
-      ssid +
-      "&ts=" +
-      ts +
-      "&redirect_uri=" +
-      encodeURIComponent(redirectUri) +
-      "&user_hash=" +
-      userHash;
+  // Substitua esta parte pelo código de autenticação do seu AP360
+  // Por enquanto, vamos apenas redirecionar para a URL especificada
+  window.location.href = continueURL;
 
-    // Realiza o redirecionamento para a página de autenticação
-    window.location.href = finalUrl;
-  }
-
-  function generateUserHash(timestamp) {
-    // Gera um user_hash único usando timestamp e algum valor aleatório
-    var randomValue = Math.random().toString(36).substring(2);
-    return timestamp.toString() + randomValue;
-  }
-});
+  // Se precisar passar mais informações, você pode enviar uma requisição para o seu servidor com esses parâmetros
+  // Exemplo de como enviar informações para o servidor usando fetch API:
+  /*fetch('URL_do_seu_servidor', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ap_mac: apMac,
+      ap_ip: apIp,
+      ap_radio: apRadio,
+      client_mac: 'coloque_o_endereço_mac_do_cliente_aqui',
+      timestamp: 'coloque_o_timestamp_aqui',
+      user_hash: userHash,
+      ssid: ssid,
+      redirect_uri: redirectUri,
+      username: 'coloque_o_nome_de_usuario_aqui',
+      password: 'coloque_a_senha_aqui'
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Aqui você pode manipular a resposta do servidor, se necessário
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+  });*/
+}
