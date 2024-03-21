@@ -3,49 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CAPTIVE PORTAL</title>
+    <title>Portal Cativo</title>
+    <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 50px;
-      }
-      input[type="submit"] {
-        margin-top: 10px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        border: none;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-      }
-    </style>
-    <h2>Bem-vindo à nossa rede Wi-Fi!</h2>
-    <img src="./img/logo.jpeg" alt="Your Logo" width="200" /><br />
-    <form id="loginForm">
-      <input type="submit" value="Entre no nosso Grupo para liberar internet" />
-    </form>
-
-    <script>
-      document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Evita o envio do formulário
-
-          // Redireciona o usuário para o link do grupo do WhatsApp
-          window.location.href =
-            "https://chat.whatsapp.com/GnHBcrdzoIpH4EAOME62dn";
-
-          // Define um timeout para liberar a internet após 10 segundos
-          setTimeout(function () {
-            alert("Internet liberada após entrar no grupo do WhatsApp!");
-            // Você pode redirecionar o usuário para uma página específica ou simplesmente fechar o portal cativo aqui
-            // Para fins de demonstração, vamos recarregar a página
-            location.reload();
-          }, 10000);
-        });
-    </script>
+    <div class="container">
+        <img id="logo" src="./img/logo.jpeg" alt="Logo"  >
+        <div class="icons">
+            <a href="https://www.instagram.com" class="instagram"><img src="./img/instagram.svg" alt="Instagram"></a>
+            <a href="https://web.whatsapp.com" class="whatsapp"><img src="./img/whatsapp.svg" alt="WhatsApp"></a>
+        </div>
+    <script src="./js/scripti.js"></script>
   </body>
 </html>
