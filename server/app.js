@@ -32,16 +32,10 @@ app.post("/submit", (req, res) => {
   // Gerar o token HMAC SHA-256
   const token = generateToken(user_hash, ts, secret);
 
-  // Montar os parâmetros para redirecionamento
-  const redirectParams = new URLSearchParams({
-    continue: redirect_uri,
-    ts: ts,
-    user_hash: user_hash,
-    token: token,
-  });
-
-  // Construir a URL final para redirecionamento
-  const finalRedirectUrl = `http://${serverIP}:${serverPort}/submit?${redirectParams.toString()}`;
+  // Construir a URL final para redirecionamento após a autenticação
+  const finalRedirectUrl = `http://${serverIP}:${serverPort}/submit?continue=${encodeURIComponent(
+    redirect_uri
+  )}&ts=${ts}&user_hash=${user_hash}&token=${token}`;
 
   // Salvar os dados em um arquivo de log
   const logData = `${new Date().toISOString()} - Nome Completo: ${fullname}, Telefone: ${phone}\n`;
@@ -51,6 +45,7 @@ app.post("/submit", (req, res) => {
       res.status(500).send("Erro ao salvar os dados");
     } else {
       // Redirecionar o navegador do usuário para a URL final
+      // Isso desencadeará a autenticação e redirecionamento para a URL desejada
       res.redirect(finalRedirectUrl);
     }
   });
