@@ -56,11 +56,6 @@ app.post("/submit", (req, res) => {
   });
 });
 
-// Log IP e porta do servidor a cada 15 segundos
-setInterval(() => {
-  console.log(`Servidor rodando em http://${serverIP}:${serverPort}`);
-}, 15000);
-
 // Iniciar o servidor
 app.listen(serverPort, serverIP, () => {
   console.log(`Servidor rodando em http://${serverIP}:${serverPort}`);

