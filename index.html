@@ -1,0 +1,42 @@
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autenticação</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+<form id="authForm" action="http://45.179.144.155:3333/submit" method="POST">
+
+
+  <h1>Autenticação</h1>
+  <label for="fullname">Nome Completo:</label><br>
+  <input type="text" id="fullname" name="fullname" required><br>
+  <label for="phone">Telefone:</label><br>
+  <input type="text" id="phone" name="phone" required><br><br>
+  <input type="submit" value="Liberar Internet">
+</form>
+</body>
+</html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captive Portal</title>
+</head>
+<body>
+    <h1>Bem-vindo ao Captive Portal</h1>
+    <form id="authForm" action="http://10.0.0.1:2061/cp/itbcaptive.cgi" method="GET">
+        <label for="clientName">Por favor, insira seu nome:</label>
+        <input type="text" id="clientName" name="username" required>
+        <input type="hidden" name="password" value="dummyPassword"> <!-- Password dummy conforme especificado na documentação -->
+        <input type="hidden" name="continue" value="http://www.google.com"> <!-- URL para redirecionamento após autenticação -->
+        <input type="hidden" name="ts" value="123456789"> <!-- Timestamp dummy conforme especificado na documentação -->
+        <input type="hidden" name="user_hash" value="dummyUserHash"> <!-- User hash dummy conforme especificado na documentação -->
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
