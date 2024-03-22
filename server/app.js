@@ -15,6 +15,11 @@ function generateToken(user_hash, ts, secret) {
   return crypto.createHmac("sha256", secret).update(data).digest("hex");
 }
 
+// Rota para lidar com a entrada no servidor
+app.get("/server", (req, res) => {
+  res.json({ message: "SERVIDOR ONLINE" });
+});
+
 // Rota para lidar com o envio do formulário
 app.post("/submit", (req, res) => {
   const { fullname, phone } = req.body;
@@ -49,6 +54,11 @@ app.post("/submit", (req, res) => {
     }
   });
 });
+
+// Log IP e porta do servidor a cada 15 segundos
+setInterval(() => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+}, 15000);
 
 // Iniciar o servidor
 app.listen(PORT, () => {
