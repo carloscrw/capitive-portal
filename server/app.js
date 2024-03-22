@@ -2,9 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const crypto = require("crypto");
+const config = require("./config");
 
 const app = express();
-const PORT = process.env.PORT || 3333;
+const { serverIP, serverPort } = config;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,7 +17,7 @@ function generateToken(user_hash, ts, secret) {
 }
 
 // Rota para lidar com a entrada no servidor
-app.get("/server", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "SERVIDOR ONLINE" });
 });
 
@@ -26,7 +27,7 @@ app.post("/submit", (req, res) => {
   const redirect_uri = req.query.redirect_uri;
   const user_hash = req.query.user_hash;
   const ts = Math.floor(Date.now() / 1000); // Timestamp em segundos
-  const secret = process.env.SECRET_KEY || "The000vd@"; // Chave secreta compartilhada configurada no AP
+  const secret = process.env.SECRET_KEY; // Chave secreta compartilhada configurada no AP
 
   // Gerar o token HMAC SHA-256
   const token = generateToken(user_hash, ts, secret);
@@ -40,7 +41,7 @@ app.post("/submit", (req, res) => {
   });
 
   // Construir a URL final para redirecionamento
-  const finalRedirectUrl = `${redirect_uri}?${redirectParams.toString()}`;
+  const finalRedirectUrl = `http://${serverIP}:${serverPort}/submit?${redirectParams.toString()}`;
 
   // Salvar os dados em um arquivo de log
   const logData = `${new Date().toISOString()} - Nome Completo: ${fullname}, Telefone: ${phone}\n`;
@@ -57,10 +58,10 @@ app.post("/submit", (req, res) => {
 
 // Log IP e porta do servidor a cada 15 segundos
 setInterval(() => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Servidor rodando em http://${serverIP}:${serverPort}`);
 }, 15000);
 
 // Iniciar o servidor
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+app.listen(serverPort, serverIP, () => {
+  console.log(`Servidor rodando em http://${serverIP}:${serverPort}`);
 });
